@@ -6,34 +6,31 @@ import le1.plp.expressions2.memory.AmbienteCompilacao;
 import le1.plp.expressions2.memory.AmbienteExecucao;
 
 /**
- * Um objeto desta classe representa uma Expressao de Subtracao.
+ * Um objeto desta classe representa uma Expressao de Soma.
  */
-public class ExpSub extends ExpBinaria {
+public class ExpMenorQue extends ExpBinaria {
 
 	/**
-	 * Controi uma Expressao de Subtracao com as sub-expressoes especificadas.
-	 * Assume-se que estas expressoes resultam em <code>ValorInteiro</code>
+	 * Controi uma Expressao de Maior que com as sub-expressoes especificadas.
+	 * Assume-se que estas sub-expressoes resultam em <code>ValorInteiro</code>
 	 * quando avaliadas.
-	 *
+	 * 
 	 * @param esq Expressao da esquerda
 	 * @param dir Expressao da direita
 	 */
-	public ExpSub(Expressao esq, Expressao dir) {
-		super(esq, dir, "-");
+	public ExpMenorQue(Expressao esq, Expressao dir) {
+		super(esq, dir, "<");
 	}
 
 	/**
-	 * Retorna o valor da Expressao de Subtracao
+	 * Retorna o valor da Expressao de Menor que
 	 * 
 	 * @param amb
 	 *            o ambiente de execu��o.
 	 */
 	public Valor avaliar(AmbienteExecucao amb) {
-		return new ValorNumerico(
-				((ValorNumerico) getEsq().avaliar(amb)).valor() -
-						((ValorNumerico) getDir().avaliar(amb)).valor(),
-				getEsq() instanceof ValorInteiro && getDir() instanceof ValorInteiro ? TipoPrimitivo.INTEIRO
-						: TipoPrimitivo.REAL);
+		return new ValorBooleano(
+				((ValorInteiro) getEsq().avaliar(amb)).valor() < ((ValorInteiro) getDir().avaliar(amb)).valor());
 	}
 
 	/**
@@ -46,8 +43,7 @@ public class ExpSub extends ExpBinaria {
 	 *         <code>false</code> caso contrario.
 	 */
 	protected boolean checaTipoElementoTerminal(AmbienteCompilacao amb) {
-		return ((getEsq().getTipo(amb).eInteiro() || getEsq().getTipo(amb).eReal())
-				&& (getDir().getTipo(amb).eInteiro() || getDir().getTipo(amb).eReal()));
+		return (getEsq().getTipo(amb).eInteiro() && getDir().getTipo(amb).eInteiro());
 	}
 
 	/**
@@ -59,8 +55,7 @@ public class ExpSub extends ExpBinaria {
 	 * @return os tipos possiveis desta expressao.
 	 */
 	public Tipo getTipo(AmbienteCompilacao amb) {
-		return getEsq().getTipo(amb).eInteiro() && getDir().getTipo(amb).eInteiro() ? TipoPrimitivo.INTEIRO
-				: TipoPrimitivo.REAL;
+		return TipoPrimitivo.BOOLEANO;
 	}
 
 }

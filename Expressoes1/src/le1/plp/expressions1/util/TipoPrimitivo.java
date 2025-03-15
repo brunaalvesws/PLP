@@ -11,7 +11,9 @@ public enum TipoPrimitivo implements Tipo {
 
 	INTEIRO("INTEIRO"),
 	BOOLEANO("BOOLEANO"),
-	STRING("STRING");
+	STRING("STRING"),
+	CHAR("CHAR"),
+	REAL("REAL");
 
 	protected String nome;
 
@@ -22,35 +24,63 @@ public enum TipoPrimitivo implements Tipo {
 		this.nome = nome;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see le1.plp.expressions1.util.Tipo#getNome()
 	 */
 	public String getNome() {
 		return nome;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see le1.plp.expressions1.util.Tipo#eInteiro()
 	 */
 	public boolean eInteiro() {
 		return this.eIgual(INTEIRO);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see le1.plp.expressions1.util.Tipo#eReal()
+	 */
+	public boolean eReal() {
+		return this.eIgual(REAL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see le1.plp.expressions1.util.Tipo#eBooleano()
 	 */
 	public boolean eBooleano() {
 		return this.eIgual(BOOLEANO);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see le1.plp.expressions1.util.Tipo#eString()
 	 */
 	public boolean eString() {
 		return this.eIgual(STRING);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see le1.plp.expressions1.util.Tipo#eChar()
+	 */
+	public boolean eChar() {
+		return this.eIgual(CHAR);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see le1.plp.expressions1.util.Tipo#eIgual(le1.plp.expressions1.util.Tipo)
 	 */
 	public boolean eIgual(Tipo tipo) {
@@ -65,15 +95,20 @@ public enum TipoPrimitivo implements Tipo {
 		return ret;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see le1.plp.expressions1.util.Tipo#eValido()
 	 */
 	public boolean eValido() {
 		return this.nome != null && nome.length() > 0;
 	}
 
-	/* (non-Javadoc)
-	 * @see le1.plp.expressions1.util.Tipo#intersecao(le1.plp.expressions1.util.Tipo)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * le1.plp.expressions1.util.Tipo#intersecao(le1.plp.expressions1.util.Tipo)
 	 */
 	public TipoPrimitivo intersecao(Tipo outroTipo) {
 		if (outroTipo.eIgual(this)) {
